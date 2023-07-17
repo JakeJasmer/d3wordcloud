@@ -64,7 +64,7 @@ write.csv(all_cues,"all_cues.csv")
 
 ### strength check
 strength_check <-target_dict %>%
-  group_by(targets) %>%
+  group_by(targets) #%>%
   summarize(mean_strength = mean(Forward.Strength))
 
 write.csv(strength_check,"strength_check.csv")

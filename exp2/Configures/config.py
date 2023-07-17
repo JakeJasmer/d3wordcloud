@@ -2,11 +2,11 @@ import csv
 import random
 #note, the first five are practices
 
-# get a target - 25 cues dictionary 
+# get a target - 2 cues dictionary 
 def get_target_dict():
     target_dict = []
     raw_dict = []
-    with open('./Configures/target_dict.csv', 'r', newline='') as f:
+    with open('./Configures/target_dict.csv', 'r', newline='') as f: 
         reader = csv.reader(f,delimiter=',')
         for row in reader:
             raw_dict.append([row[0],row[1]])
@@ -114,6 +114,9 @@ svg_width = 400
 svg_height = 400
 trial_num = 90
 prac_num = 5 
+burn_num = prac_num + 12 # this is the cutoff for burn-ins
+half = trial_num / 2
+burn_in = int((burn_num - prac_num) / 2) # this is the number of burn-ins per half (6)
 
 def get_font_type():
     return font_type
@@ -125,12 +128,25 @@ def get_size():
 # the first five is practice trial
 def get_order():
     order = list(range(0,prac_num))
-    avail =  list(range(prac_num,trial_num+prac_num))
+    burn_in_1 = randomize_list(list(range(prac_num, prac_num + burn_in)))
+    order.extend(burn_in_1)
+    burn_in_2 = randomize_list(list(range(prac_num + burn_in, burn_num))) # burn-ins after halfway point
+    avail =  list(range(burn_num,trial_num + burn_num))
     for i in range(0,trial_num):
+        if i == half:
+            order.extend(burn_in_2)
         x = random.choice(avail)
         order.append(x)
         avail.remove(x)
     return order
 
 def get_config_env():
-    return [prac_num,trial_num+prac_num]
+    return [prac_num, trial_num + burn_num]
+
+def randomize_list(list):
+    out = []
+    for i in range(0, len(list)):
+        rand = random.choice(list)
+        out.append(rand)
+        list.remove(rand)
+    return out
