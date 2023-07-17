@@ -10,9 +10,9 @@ try:
     from psycopg2 import sql
 except Exception as e:
     print(e, file=sys.stderr)
-tid_database = 'wc22_e2_tid'
-results_database = 'wc22_e2a_results'
-demographics_database = 'wc22_e2a_dem'
+tid_database = 'wc23_e1_tid'
+results_database = 'wc23_e1_results'
+demographics_database = 'wc23_e1_dem'
 
 from flask_util_js import FlaskUtilJs
 
