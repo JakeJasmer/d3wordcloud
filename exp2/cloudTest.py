@@ -38,7 +38,7 @@ def buildcloud(trial):
     if int(trial) > 107: # changed to 107 from 95
         return 'done'
     # weather to build all cloud, 1 means yes
-    buildAll = 1
+    buildAll = 0
     return render_template('cloud.html',buildall = buildAll, trial_num = trial, size = config.get_size(),words = json.dumps(get_words(int(trial))),font_type = config.get_font_type())
 
 @app.route('/landing/')
