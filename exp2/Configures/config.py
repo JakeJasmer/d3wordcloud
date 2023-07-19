@@ -112,7 +112,7 @@ def get_display_time(stim_id):
 font_type = "Times New Roman"
 svg_width = 400
 svg_height = 400
-trial_num = 90
+trial_num = 108 # added 18 for divisibility
 prac_num = 5 
 burn_num = prac_num + 12 # this is the cutoff for burn-ins
 half = trial_num / 2
